@@ -7,31 +7,31 @@
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
+  <div id="dark_mode">
+    <img src="/Icons/dark.svg" width="48px" height="48px" id="dark_switch" class="dark btn">
+    <img src="/Icons/white.svg"  id= "white_switch" width="48px" height="48px" class="hidden white btn">
+  </div>
+  <div id="overlay" class="hidden"></div>
+  <div id="add-layer" class="hidden">
+    <form id="sub">
+    <input class="textfill" type="text" id="name_of_book" placeholder="Title" autofocus required>
+    <input class="textfill" type="text" id="name_of_author" placeholder="Author" required>
+    <input class="textfill" type="number" min="1"max ="999" placeholder = "Number of Pages" required>
+    <input type="submit" pattern="[0-9]*" id="create" value="Create">
+    </form>
+    </div>
 <div id="page-wrapper">
   <div id="heading">
   <img class="heading-class white hidden" id="library-heading-icon" src="/Icons/library.svg">
   <img class="heading-class dark" id="library-heading-icon" src="/Icons/library-dark.svg">
   <h1 class="heading-class">The Library</h1>
   </div>
-  <div>
-    <div id="info-pane">
-    <h2>Information</h2>
-    <h3>Books Stored: 0</h3>
-    <h3>Books Unread: 0</h3>
-    </div>
-    <div id="add">
-      <img class="dark add_btn btn" src="/Icons/add-dark.svg">
-      <img class="white hidden add_btn btn" src="/Icons/add.svg">
-    </div>
-  </div>
   <hr>
+  <button id="add">Add Book</button>
   <div id="list">
     
   </div>
-  <div id="dark_mode">
-    <img src="/Icons/dark.svg" id="dark_switch" class="dark btn">
-    <img src="/Icons/white.svg"  id= "white_switch" class="hidden white btn">
-  </div>
+
 </div>
 <script src="main.js"></script>
 </body>
