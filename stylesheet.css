@@ -6,26 +6,28 @@ body{
     z-index: 5;
     position: absolute;
     cursor: default;
-    width: 75vmin;
-    height: 75vmin;
+    width: 50vmax;
+    height: 50vmax;
+    min-height: 700px;
     margin: 0 auto;
     background-color: rgba(88, 110, 110, 1);
     border-radius: 50px;
-    filter: brightness(0.7);top: 50%;
+    filter: brightness(0.7);
+    top: 50%;
     left: 50%;
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
 }
 #sub{
-    width: 50%;
-    height: 50%;
+    width: fit-content;
+    height: 75%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat( 4, 1fr);
-    grid-gap: 2rem;
-    padding-top: 20%;;
+    grid-template-rows: repeat( 5, 1fr);
+    grid-gap: 1rem;
+    padding: 10%;
+    font-size: 2rem;
 }
 #sub input{
     border-radius: 20px;
@@ -83,10 +85,10 @@ body{
     border-radius: 50%;
 }
 #add{
-    background-color:burlywood;
-    font-size:6rem;
+    background-color:rgb(202, 167, 121);
+    font-size:5rem;
     padding:20px;
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 50px;
 }
 #list{
