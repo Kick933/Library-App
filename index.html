@@ -16,7 +16,8 @@
     <form id="sub">
     <input class="textfill" type="text" id="name_of_book" placeholder="Title" autofocus required>
     <input class="textfill" type="text" id="name_of_author" placeholder="Author" required>
-    <input class="textfill" type="number" min="1"max ="999" placeholder = "Number of Pages" required>
+    <input class="textfill" type="number" min="1"max ="999" placeholder = "Number of Pages" id="number_of_pages" required>
+    <input type="checkbox" id="read"><p>Read</p>
     <input type="submit" pattern="[0-9]*" id="create" value="Create">
     </form>
     </div>
@@ -27,8 +28,15 @@
   <h1 class="heading-class">The Library</h1>
   </div>
   <hr>
-  <button id="add">Add Book</button>
+  <button id="add" class="btn">Add Book</button>
   <div id="list">
+    <div data-index="0" class="book-card">
+      <p>Name of Book</p>
+      <p>Name of author</p>
+      <p>Pages in book</p>
+      <button class="read childBtn">Read</button>
+      <button class="remove childBtn">Remove</button>
+    </div>
     
   </div>
 

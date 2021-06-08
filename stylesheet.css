@@ -1,18 +1,17 @@
 body{
     text-align : center;
-    background-color: #d6e0f0;
+    background-color: #f1f3f8;
 }
 #add-layer{
     z-index: 5;
     position: absolute;
     cursor: default;
-    width: 50vmax;
-    height: 50vmax;
+    width: 50rem;
+    height: 50rem;
     min-height: 700px;
     margin: 0 auto;
-    background-color: rgba(88, 110, 110, 1);
+    background-color:#d6e0f0;
     border-radius: 50px;
-    filter: brightness(0.7);
     top: 50%;
     left: 50%;
     -moz-transform: translateX(-50%) translateY(-50%);
@@ -20,11 +19,10 @@ body{
     transform: translateX(-50%) translateY(-50%);
 }
 #sub{
-    width: fit-content;
     height: 75%;
     margin: 0 auto;
     display: grid;
-    grid-template-rows: repeat( 5, 1fr);
+    grid-template-rows: repeat( 6, 1fr);
     grid-gap: 1rem;
     padding: 10%;
     font-size: 2rem;
@@ -79,21 +77,18 @@ body{
 .hidden{
     display:none;
 }
-.btn:hover{
-    opacity: 0.7;
-    background-color:yellow;
-    border-radius: 50%;
-}
 #add{
-    background-color:rgb(202, 167, 121);
+    background-color:#9ae68be3;
     font-size:5rem;
     padding:20px;
-    border-radius: 20px;
+    border-radius: 10px;
     margin: 50px;
+    border: 2px black solid;
 }
 #list{
-    display:grid;
-    grid-template-rows: repeat(4,1fr);
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 #overlay {
     position: fixed;
@@ -107,3 +102,35 @@ body{
     z-index: 2;
     cursor:default;
   }
+.book-card{
+    width: 20rem;
+    margin: 3rem;
+    border-radius: 20px;
+    outline: 2px rgba(88, 110, 110, 1) solid;
+    font-size: 2rem;
+    padding: 2rem;
+}
+.childBtn{
+    width: 75%;
+    border-radius: 10px;
+    height: 4rem;
+    font-size: 2rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+.read{
+    background-color: #9ae68b;
+    border: 1px black solid;
+}
+.remove{
+    background-color: #da9797;
+    border: 1px black solid;
+}
+button:hover{
+    filter:brightness(0.7);
+}
+input[type=checkbox]{
+    border-radius: 50%;
+    border: 2px gray solid;
+    min-height: 50px;
+}

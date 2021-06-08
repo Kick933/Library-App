@@ -20,25 +20,26 @@ function schemeChange(){
     }
 }
 
+// The main Array which stores the objects.
+let stored = [];
 
 const dark = document.querySelector("#dark_mode");
 dark.addEventListener('click', schemeChange);
 
-function Book(name,author,read,pages){
-    name: name;
-    author: author;
-    read: read;
-    pages: pages;
+function Book(bookName,bokAuthor,bookPages,bookRead){
+    this.name= bookName;
+    this.author= bookAuthor;
+    this.read= bookRead;
+    this.pages= bookPages;
 }
-
-// To toggle overlay
-const overlay = document.querySelector("#overlay");
-
-const addBtn = document.querySelector("#add");
-addBtn.addEventListener('click', ()=>{
+// function to toggle hideen classes of 
+function toggleAddLayer(){
     document.getElementById("overlay").classList.toggle("hidden");
     document.getElementById("add-layer").classList.toggle("hidden");
-})
+}
+// Add Eventlistener to ADD BUTTON and DARK OVERLAY.
+document.querySelector("#add").addEventListener('click',toggleAddLayer)
+document.querySelector("#overlay").addEventListener('click',toggleAddLayer)
 
 //Declaring variables used.
 let darkmode = 0;// used in schemechange function.
@@ -49,5 +50,13 @@ let bookPages;// used for getting pages of book from DOM
 let bookRead;// Used to get book read status from DOM
 // Variable declaration ends
 function addBookToLibrary(){
-    document.getElementById("name_of_book").value
+    bookName = document.getElementById("name_of_book").value;
+    bookAuthor = document.getElementById("name_of_author").value;
+    bookPages = document.getElementById("number_of_pages").value;
+    bookRead = document.getElementById("read").checked;
+    stored.push(new Book(bookName,bookAuthor,bookPages,bookRead));
+    console.log(stored);
 }
+
+
+document.getElementById("create").addEventListener('click', addBookToLibrary);
