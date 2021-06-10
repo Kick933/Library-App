@@ -78,6 +78,7 @@ body{
     display:none;
 }
 #add{
+    overflow: auto; 
     background-color:#9ae68be3;
     font-size:5rem;
     padding:20px;
@@ -87,7 +88,7 @@ body{
 }
 #list{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 #overlay {
@@ -103,12 +104,12 @@ body{
     cursor:default;
   }
 .book-card{
-    width: 20rem;
-    margin: 3rem;
+    width: 25rem;
+    margin: 5rem 3rem 5rem 3rem;
     border-radius: 20px;
     outline: 2px rgba(88, 110, 110, 1) solid;
     font-size: 2rem;
-    padding: 2rem;
+    padding: 0 0 2rem 0;
 }
 .childBtn{
     width: 75%;
@@ -118,13 +119,27 @@ body{
     padding: 1rem;
     margin: 1rem;
 }
+.title{
+    font-size: 200%;
+    font-weight: 600;
+}
+.author{
+    font-size: 150%;
+}
 .read{
     background-color: #9ae68b;
-    border: 1px black solid;
+    width:90%;
+    border: 2px black solid;
+    font-size: 2rem;
+    border-radius: 10px;
+    margin: 1rem;
 }
 .remove{
-    background-color: #da9797;
-    border: 1px black solid;
+    width: 90%;
+    background-color: #f57f7f;
+    border: 2px black solid;
+    font-size: 2rem;
+    border-radius: 10px;
 }
 button:hover{
     filter:brightness(0.7);
@@ -134,3 +149,5 @@ input[type=checkbox]{
     border: 2px gray solid;
     min-height: 50px;
 }
+
+

@@ -1,3 +1,4 @@
+// used for dark mode toggle
 function schemeChange(){
     const isDarkNodelist = document.querySelectorAll(".dark");
     const isDark = Array.from(isDarkNodelist);
@@ -19,23 +20,37 @@ function schemeChange(){
         darkmode = 1;
     }
 }
+const dark = document.querySelector("#dark_mode");
+dark.addEventListener('click', schemeChange);
+/////////////////////////////////////////////////////////
+
+
 
 // The main Array which stores the objects.
 let stored = [];
 
-const dark = document.querySelector("#dark_mode");
-dark.addEventListener('click', schemeChange);
 
-function Book(bookName,bokAuthor,bookPages,bookRead){
+// Add event listener to create btn of add overlay
+document.getElementById("create").addEventListener('click', ()=>{
+    event.preventDefault();
+    verifyInput();
+});
+
+// The Object constructor.
+function Book(bookName,bookAuthor,bookPages,bookRead){
     this.name= bookName;
     this.author= bookAuthor;
     this.read= bookRead;
     this.pages= bookPages;
 }
-// function to toggle hideen classes of 
+// function to toggle hidden class for overlays.
 function toggleAddLayer(){
     document.getElementById("overlay").classList.toggle("hidden");
     document.getElementById("add-layer").classList.toggle("hidden");
+}
+// function to empty the form for book addition.
+function resetTheForm(){
+    document.getElementById("sub").reset();
 }
 // Add Eventlistener to ADD BUTTON and DARK OVERLAY.
 document.querySelector("#add").addEventListener('click',toggleAddLayer)
@@ -44,19 +59,108 @@ document.querySelector("#overlay").addEventListener('click',toggleAddLayer)
 //Declaring variables used.
 let darkmode = 0;// used in schemechange function.
 let temp; //Just a reusable temporary variable.
-let bookName;// used for getting book name from DOM
-let bookAuthor;// used for getting book author from DOM
-let bookPages;// used for getting pages of book from DOM
-let bookRead;// Used to get book read status from DOM
+
 // Variable declaration ends
-function addBookToLibrary(){
-    bookName = document.getElementById("name_of_book").value;
-    bookAuthor = document.getElementById("name_of_author").value;
-    bookPages = document.getElementById("number_of_pages").value;
-    bookRead = document.getElementById("read").checked;
-    stored.push(new Book(bookName,bookAuthor,bookPages,bookRead));
-    console.log(stored);
+
+// Verification function for book pages before adding to library.
+function verifyInput(){
+    if(document.getElementById("name_of_book").value != "" &&
+     document.getElementById("name_of_author").value !="" &&
+     typeof(parseInt(document.getElementById("number_of_pages").value)) =="number" &&
+     document.querySelector("#number_of_pages").value != ""){
+    checkDuplicates();
+    }else{
+        alert("Please fill the form correctly.")
+    }
 }
 
 
-document.getElementById("create").addEventListener('click', addBookToLibrary);
+// Adds book to stored array and calls the render function.
+function addBookToLibrary(){
+    toggleAddLayer();
+    // Addition of the book to library array.
+    let bookName = document.getElementById("name_of_book").value;
+    let bookAuthor = document.getElementById("name_of_author").value;
+    let bookPages = document.getElementById("number_of_pages").value;
+    let bookRead = document.getElementById("read").checked;
+    stored.push(new Book(bookName,bookAuthor,bookPages,bookRead));
+    console.log(stored);
+    resetTheForm();
+    // Looping through array and creating DOM Elements for list
+   renderBooks();
+}
+// Checks for duplicates in stored Array.
+function checkDuplicates(){
+        if(stored.length==0){
+        }else{
+        for(let i=0; i < stored.length; i++){
+            const beingChecked = stored[i];
+            if(document.querySelector("#name_of_book").value == beingChecked.name){
+                alert("duplicates not allowed.");
+                return;
+            }
+        }
+}
+    addBookToLibrary();
+    }
+// Loops through stored array after removing child element of id= "list" div and creates DOM Elements for list
+function renderBooks(){
+    document.querySelector("#list").textContent ="";
+    for(let i = 0; i < stored.length; i++){
+        const currentBook = stored[i];
+        // Creates the card.
+        const card = document.createElement('div');
+        card.classList.add('book-card');
+        card.setAttribute("id",`${i}`);
+        card.setAttribute("data-index",`${i}`);
+        // Push book name inside the card.
+        const title = document.createElement('p');
+        title.innerText = currentBook.name;
+        title.classList.add("title")
+        card.appendChild(title);
+        // Push Book Author inside the card.
+        writer = document.createElement('p');
+        writer.innerText = currentBook.author;
+        writer.classList.add("author")
+        card.appendChild(writer);
+        // Push Book pages inside the card.
+        numberOfPages = document.createElement('p');
+        numberOfPages.textContent = currentBook.pages;
+        card.appendChild(numberOfPages);
+        // Push Read status to the card.
+        const readBtn = document.createElement('button')
+        readBtn.classList.add('read');
+        readBtn.setAttribute("id",`${i}`);
+        if(currentBook.read == true){
+            readBtn.innerText = "Read";
+        }else{
+            readBtn.innerText = "Not Read";
+        }
+        // Changes Read state of the book.
+        readBtn.addEventListener('click', ()=>{
+            if(currentBook.read == true){
+                currentBook.read = false;
+                readBtn.innerText = "Not Read";
+            }else{
+                currentBook.read = true;
+                readBtn.innerText = "Read";
+            }
+        });
+        card.appendChild(readBtn);
+        
+        // Push Remove Button to the card
+        const removeBtn = document.createElement('button');
+        removeBtn.classList.add('remove');
+        removeBtn.innerText ="Remove";
+        removeBtn.addEventListener('click', ()=>{
+            stored.splice(i,1);
+            console.log(stored);
+            renderBooks();
+        });
+        card.appendChild(removeBtn);
+
+       
+        // Append the card to DOM
+        document.querySelector("#list").appendChild(card);
+    }
+}
