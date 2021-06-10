@@ -207,7 +207,7 @@ function updateStored(){
 if (storageAvailable('localStorage')){
     if(localStorage.getItem('books') != null){
         const alreadyStored = localStorage.getItem('books');
-        stored = JSON.parse(alreadystored);
+        stored = JSON.parse(alreadyStored);
         renderBooks();
     }
 }
