@@ -105,6 +105,7 @@ function checkDuplicates(){
     }
 // Loops through stored array after removing child element of id= "list" div and creates DOM Elements for list
 function renderBooks(){
+    updateStored();
     document.querySelector("#list").textContent ="";
     for(let i = 0; i < stored.length; i++){
         const currentBook = stored[i];
@@ -162,5 +163,51 @@ function renderBooks(){
        
         // Append the card to DOM
         document.querySelector("#list").appendChild(card);
+    }
+}
+
+
+// Function to check for Local Storage
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+// To update LocalStorage with everybook addition or deletion.
+function updateStored(){
+    if (storageAvailable('localStorage')) {
+        localStorage.setItem("books", JSON.stringify(stored));
+      }
+      else {
+        return;
+      }
+}
+
+// To check pre-populated data in localstorage and render it.
+
+if (storageAvailable('localStorage')){
+    if(localStorage.getItem('books') != null){
+        const alreadyStored = localStorage.getItem('books');
+        stored = JSON.parse(alreadystored);
+        renderBooks();
     }
 }
